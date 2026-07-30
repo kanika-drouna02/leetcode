@@ -1,0 +1,25 @@
+class Solution {
+public:
+
+    int reverse(int x){
+        int rev =0;
+        while(x>0){
+            rev=rev*10 + x%10;
+            x/=10;
+        }
+        return rev;
+    }
+
+    int minMirrorPairDistance(vector<int>& a) {
+        unordered_map<int,int>mp;
+        int n=a.size();
+        int ans=1e6;
+        for(int i=0;i<n;i++){
+            if(mp.count(a[i])){
+                ans=min(ans, i-mp[a[i]]);
+            }
+            mp[reverse(a[i])] =i;
+        }
+        return ans== 1e6 ? -1 : ans;
+    }
+};
