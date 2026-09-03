@@ -5,15 +5,13 @@ public:
         for(auto ch:tasks){
             freq[ch-'A']++;
         }
-        sort(freq.begin(),freq.end(),greater<int>());
+        int mx=0,cnt=0;
 
-        int ideal = (freq[0]-1)*n;
+        for(int f:freq) mx=max(mx,f);
+        for(int f:freq) if(f==mx) cnt++;
 
-        for(int i=1;i<freq.size();i++){
-            ideal = ideal - min(freq[0]-1 , freq[i]);
-        }
-
-        return tasks.size()+ max(0,ideal);
+        int slots=(mx-1)*(n+1)+cnt;
+        return max((int)tasks.size(),slots);
 
     }
 };
